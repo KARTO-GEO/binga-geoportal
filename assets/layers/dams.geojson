@@ -1,0 +1,81 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          27.25,
+          -17.5
+        ]
+      },
+      "properties": {
+        "id": "id_0050",
+        "name": "Nakaluba Dam",
+        "ward": "Ward 3 - Kariangwe",
+        "village": "Kariangwe",
+        "description": "Small earth dam for livestock and irrigation",
+        "imgURL": "assets/images/dams/Nakaluba_Dam.jpg",
+        "layer": "dams"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          27.4,
+          -17.38
+        ]
+      },
+      "properties": {
+        "id": "id_0051",
+        "name": "Manjolo Dam",
+        "ward": "Ward 5 - Manjolo",
+        "village": "Manjolo",
+        "description": "Community dam supplying water to Manjolo",
+        "imgURL": "assets/images/dams/Manjolo_Dam.jpg",
+        "layer": "dams"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          27.15,
+          -17.58
+        ]
+      },
+      "properties": {
+        "id": "id_0052",
+        "name": "Kariangwe Dam",
+        "ward": "Ward 3 - Kariangwe",
+        "village": "Kariangwe",
+        "description": "Irrigation dam with siltation challenges",
+        "imgURL": "assets/images/dams/Kariangwe_Dam.jpg",
+        "layer": "dams"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          27.3,
+          -17.72
+        ]
+      },
+      "properties": {
+        "id": "id_0053",
+        "name": "Simatelele Dam",
+        "ward": "Ward 7 - Simatelele",
+        "village": "Simatelele",
+        "description": "Dam near Lake Kariba shore",
+        "imgURL": "assets/images/dams/Simatelele_Dam.jpg",
+        "layer": "dams"
+      }
+    }
+  ]
+}

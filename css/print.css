@@ -1,0 +1,93 @@
+/* ═══════════════════════════════════════════════════
+   print.css — Print Layout
+   Binga Geoportal
+   ═══════════════════════════════════════════════════ */
+
+@media print {
+  /* Hide non-essential elements */
+  #login-page,
+  .portal-header,
+  .sidebar,
+  .map-toolbar,
+  .toast-container,
+  .modal-overlay,
+  .coord-display,
+  .popup-actions,
+  .leaflet-control-zoom,
+  .leaflet-control-attribution {
+    display: none !important;
+  }
+
+  /* Reset page */
+  body {
+    overflow: visible !important;
+    height: auto !important;
+    background: #fff !important;
+    color: #000 !important;
+  }
+
+  #portal-page {
+    display: block !important;
+    height: auto !important;
+  }
+
+  .portal-body {
+    display: block !important;
+    height: auto !important;
+  }
+
+  /* Map fills the page */
+  .map-container {
+    width: 100% !important;
+    height: 80vh !important;
+    page-break-after: avoid;
+  }
+
+  #map {
+    width: 100% !important;
+    height: 100% !important;
+  }
+
+  /* Show legend for print */
+  .legend-container {
+    position: static !important;
+    display: block !important;
+    border: 1px solid #ccc !important;
+    background: #fff !important;
+    box-shadow: none !important;
+    margin-top: 1rem;
+    max-height: none !important;
+    page-break-inside: avoid;
+  }
+
+  .legend-container h4 {
+    color: #333 !important;
+  }
+
+  .legend-item span {
+    color: #333 !important;
+  }
+
+  /* Print header */
+  .portal-body::before {
+    content: 'Binga Geoportal — Binga Rural District Council';
+    display: block;
+    font-size: 18pt;
+    font-weight: bold;
+    text-align: center;
+    padding: 1rem 0;
+    border-bottom: 2px solid #333;
+    margin-bottom: 0.5rem;
+  }
+
+  .portal-body::after {
+    content: 'Printed on ' attr(data-print-date) ' | © BRDC';
+    display: block;
+    font-size: 8pt;
+    text-align: center;
+    color: #999;
+    padding-top: 0.5rem;
+    border-top: 1px solid #ccc;
+    margin-top: 0.5rem;
+  }
+}

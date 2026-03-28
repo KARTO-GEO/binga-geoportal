@@ -1,0 +1,62 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          27.6,
+          -17.5
+        ]
+      },
+      "properties": {
+        "id": "id_0069",
+        "name": "Binga Graphite Mine",
+        "ward": "Ward 5 - Manjolo",
+        "village": "Manjolo",
+        "description": "Active graphite mining claim",
+        "imgURL": "assets/images/miningClaims/Binga_Graphite_Mine.jpg",
+        "layer": "miningClaims"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          27.7,
+          -17.55
+        ]
+      },
+      "properties": {
+        "id": "id_0070",
+        "name": "Kariangwe Lithium Prospect",
+        "ward": "Ward 3 - Kariangwe",
+        "village": "Kariangwe",
+        "description": "Lithium exploration claim",
+        "imgURL": "assets/images/miningClaims/Kariangwe_Lithium_Prospect.jpg",
+        "layer": "miningClaims"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          27.8,
+          -17.45
+        ]
+      },
+      "properties": {
+        "id": "id_0071",
+        "name": "Pashu Coal Deposit",
+        "ward": "Ward 6 - Pashu",
+        "village": "Pashu",
+        "description": "Coal mining claim",
+        "imgURL": "assets/images/miningClaims/Pashu_Coal_Deposit.jpg",
+        "layer": "miningClaims"
+      }
+    }
+  ]
+}

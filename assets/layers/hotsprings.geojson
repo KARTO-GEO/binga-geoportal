@@ -1,0 +1,22 @@
+{
+"type": "FeatureCollection",
+"name": "hotSprings",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "id": null, "name": "Lubimbi Hotsprings", "ward": null, "village": null, "description": null, "imgURL": null }, "geometry": { "type": "Point", "coordinates": [ 27.306038390000026, -18.475897459999942 ] } },
+{ "type": "Feature", "properties": { "id": null, "name": "Lubimbi Hotsprings", "ward": null, "village": null, "description": null, "imgURL": null }, "geometry": { "type": "Point", "coordinates": [ 27.296342710000033, -18.470006369999965 ] } },
+{ "type": "Feature", "properties": { "id": null, "name": "Binga Springs", "ward": null, "village": null, "description": null, "imgURL": null }, "geometry": { "type": "Point", "coordinates": [ 27.358368290000044, -17.592911509999965 ] } },
+{ "type": "Feature", "properties": { "id": null, "name": "Chebira Springs", "ward": null, "village": null, "description": null, "imgURL": null }, "geometry": { "type": "Point", "coordinates": [ 27.781346810000059, -18.167392899999982 ] } },
+{ "type": "Feature", "properties": { "id": null, "name": "Chebira Springs", "ward": null, "village": null, "description": null, "imgURL": null }, "geometry": { "type": "Point", "coordinates": [ 27.762242570000069, -18.14542997999996 ] } },
+{ "type": "Feature", "properties": { "id": null, "name": "Kapari Salt Spring", "ward": null, "village": null, "description": null, "imgURL": null }, "geometry": { "type": "Point", "coordinates": [ 27.894588050000038, -18.090208149999967 ] } },
+{ "type": "Feature", "properties": { "id": null, "name": "Tivuli Spring", "ward": null, "village": null, "description": null, "imgURL": null }, "geometry": { "type": "Point", "coordinates": [ 28.026799160000053, -18.064784609999947 ] } },
+{ "type": "Feature", "properties": { "id": null, "name": "Muchaninga Spring", "ward": null, "village": null, "description": null, "imgURL": null }, "geometry": { "type": "Point", "coordinates": [ 27.707024180000076, -17.87089420999996 ] } },
+{ "type": "Feature", "properties": { "id": null, "name": "Mazintuba Spring", "ward": null, "village": null, "description": null, "imgURL": null }, "geometry": { "type": "Point", "coordinates": [ 27.840431360000025, -17.70437174999995 ] } },
+{ "type": "Feature", "properties": { "id": null, "name": "Binga Spring", "ward": null, "village": null, "description": null, "imgURL": null }, "geometry": { "type": "Point", "coordinates": [ 27.854582640000046, -17.679654779999964 ] } },
+{ "type": "Feature", "properties": { "id": null, "name": "Tyetyebwende Spring", "ward": null, "village": null, "description": null, "imgURL": null }, "geometry": { "type": "Point", "coordinates": [ 27.856877, -17.602716699999974 ] } },
+{ "type": "Feature", "properties": { "id": null, "name": "Manjolo Spring", "ward": null, "village": null, "description": null, "imgURL": null }, "geometry": { "type": "Point", "coordinates": [ 27.416843970000059, -17.722372169999971 ] } },
+{ "type": "Feature", "properties": { "id": null, "name": "Chibwatata Hot Spring", "ward": null, "village": null, "description": null, "imgURL": null }, "geometry": { "type": "Point", "coordinates": [ 27.349943290000056, -17.599337549999973 ] } },
+{ "type": "Feature", "properties": { "id": null, "name": "Kabira Hotspring", "ward": null, "village": null, "description": null, "imgURL": null }, "geometry": { "type": "Point", "coordinates": [ 27.122772040000029, -18.003929139999968 ] } },
+{ "type": "Feature", "properties": { "id": null, "name": "Saba Hotspring", "ward": null, "village": null, "description": null, "imgURL": null }, "geometry": { "type": "Point", "coordinates": [ 27.11800850000003, -18.01338340999996 ] } }
+]
+}

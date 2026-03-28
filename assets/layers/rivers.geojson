@@ -1,0 +1,182 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            27.5,
+            -17.05
+          ],
+          [
+            27.45,
+            -17.15
+          ],
+          [
+            27.4,
+            -17.25
+          ],
+          [
+            27.38,
+            -17.35
+          ],
+          [
+            27.35,
+            -17.5
+          ],
+          [
+            27.34,
+            -17.65
+          ],
+          [
+            27.35,
+            -17.8
+          ]
+        ]
+      },
+      "properties": {
+        "id": "id_0045",
+        "name": "Mlibizi River",
+        "ward": "Multiple",
+        "village": "Multiple",
+        "description": "Major river flowing into Lake Kariba",
+        "imgURL": "",
+        "layer": "rivers"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            26.7,
+            -17.1
+          ],
+          [
+            26.75,
+            -17.3
+          ],
+          [
+            26.8,
+            -17.5
+          ],
+          [
+            26.85,
+            -17.7
+          ],
+          [
+            26.9,
+            -17.9
+          ]
+        ]
+      },
+      "properties": {
+        "id": "id_0046",
+        "name": "Gwayi River",
+        "ward": "Multiple",
+        "village": "Multiple",
+        "description": "Western boundary river of Binga District",
+        "imgURL": "",
+        "layer": "rivers"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            28.2,
+            -17.2
+          ],
+          [
+            28.15,
+            -17.4
+          ],
+          [
+            28.1,
+            -17.6
+          ],
+          [
+            28.05,
+            -17.8
+          ],
+          [
+            28,
+            -18
+          ]
+        ]
+      },
+      "properties": {
+        "id": "id_0047",
+        "name": "Sengwa River",
+        "ward": "Multiple",
+        "village": "Multiple",
+        "description": "Eastern boundary river",
+        "imgURL": "",
+        "layer": "rivers"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            27.2,
+            -17.3
+          ],
+          [
+            27.25,
+            -17.45
+          ],
+          [
+            27.3,
+            -17.55
+          ]
+        ]
+      },
+      "properties": {
+        "id": "id_0048",
+        "name": "Sebungwe River",
+        "ward": "Multiple",
+        "village": "Multiple",
+        "description": "Tributary flowing into Lake Kariba",
+        "imgURL": "",
+        "layer": "rivers"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            27.6,
+            -17.25
+          ],
+          [
+            27.55,
+            -17.4
+          ],
+          [
+            27.5,
+            -17.55
+          ]
+        ]
+      },
+      "properties": {
+        "id": "id_0049",
+        "name": "Masumu River",
+        "ward": "Multiple",
+        "village": "Multiple",
+        "description": "Perennial river in eastern Binga",
+        "imgURL": "",
+        "layer": "rivers"
+      }
+    }
+  ]
+}

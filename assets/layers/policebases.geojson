@@ -1,0 +1,15 @@
+{
+"type": "FeatureCollection",
+"name": "policeBases",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "Name": "Siachilaba", "ward": null, "village": null, "description": null, "imgURL": null, "layer": null, "path": "D:\\perssonal\\BingaMasterPlan\\shapefiles\\Police\\Police.shp" }, "geometry": { "type": "Point", "coordinates": [ 27.286693960000036, -17.841140459999963 ] } },
+{ "type": "Feature", "properties": { "Name": "Mlibizi", "ward": null, "village": null, "description": null, "imgURL": null, "layer": null, "path": "D:\\perssonal\\BingaMasterPlan\\shapefiles\\Police\\Police.shp" }, "geometry": { "type": "Point", "coordinates": [ 27.073536850000039, -17.939407019999976 ] } },
+{ "type": "Feature", "properties": { "Name": "Kariyangwe", "ward": null, "village": null, "description": null, "imgURL": null, "layer": null, "path": "D:\\perssonal\\BingaMasterPlan\\shapefiles\\Police\\Police.shp" }, "geometry": { "type": "Point", "coordinates": [ 27.535083330000077, -17.970208319999927 ] } },
+{ "type": "Feature", "properties": { "Name": "Simatelele", "ward": null, "village": null, "description": null, "imgURL": null, "layer": null, "path": "D:\\perssonal\\BingaMasterPlan\\shapefiles\\Police\\Police.shp" }, "geometry": { "type": "Point", "coordinates": [ 27.258748690000061, -17.787908619999939 ] } },
+{ "type": "Feature", "properties": { "Name": "Tinde", "ward": null, "village": null, "description": null, "imgURL": null, "layer": null, "path": "D:\\perssonal\\BingaMasterPlan\\shapefiles\\Police\\Police.shp" }, "geometry": { "type": "Point", "coordinates": [ 27.181801671062392, -18.252789285070271 ] } },
+{ "type": "Feature", "properties": { "Name": "Lubimbi", "ward": null, "village": null, "description": null, "imgURL": null, "layer": null, "path": "D:\\perssonal\\BingaMasterPlan\\shapefiles\\Police\\Police.shp" }, "geometry": { "type": "Point", "coordinates": [ 27.286224634637751, -18.487134546910916 ] } },
+{ "type": "Feature", "properties": { "Name": "Pashu", "ward": null, "village": null, "description": null, "imgURL": null, "layer": null, "path": "D:\\perssonal\\BingaMasterPlan\\shapefiles\\Police\\Police.shp" }, "geometry": { "type": "Point", "coordinates": [ 27.398148560213858, -18.208370037562791 ] } },
+{ "type": "Feature", "properties": { "Name": "Sijarira", "ward": null, "village": null, "description": null, "imgURL": null, "layer": null, "path": "D:\\perssonal\\BingaMasterPlan\\shapefiles\\Police\\Police.shp" }, "geometry": { "type": "Point", "coordinates": [ 27.49472743684899, -17.511508107039731 ] } }
+]
+}

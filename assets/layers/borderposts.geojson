@@ -1,0 +1,8 @@
+{
+"type": "FeatureCollection",
+"name": "borderPosts",
+"features": [
+{ "type": "Feature", "properties": { "id": null, "name": "Binga Border Post", "ward": "Binga Town", "village": null, "description": null, "imgURL": null, "layer": null }, "geometry": { "type": "Point", "coordinates": [ 27.35051679791987, -17.599293291863869 ] } },
+{ "type": "Feature", "properties": { "id": null, "name": "Chibuyu Boarder Post", "ward": null, "village": null, "description": null, "imgURL": null, "layer": null }, "geometry": { "type": "Point", "coordinates": [ 27.870549087408357, -17.126682483228688 ] } }
+]
+}

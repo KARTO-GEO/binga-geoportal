@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Binga Geoportal — Binga Rural District Council</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='45' fill='%231B5E3B'/><text x='50' y='65' font-size='45' text-anchor='middle' fill='%23D4A843'>B</text></svg>">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet-draw@1.0.4/dist/leaflet.draw.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="css/print.css" media="print" />
+</head>
+<body>
+
+<!-- LOADING SCREEN -->
+<div id="loading-screen">
+  <div class="loading-crest"><i class="fas fa-globe-africa"></i></div>
+  <div class="loading-text">Binga Geoportal</div>
+  <div class="loading-sub">Loading spatial data infrastructure...</div>
+  <div class="loading-bar"><div class="loading-bar-fill"></div></div>
+</div>
+
+<!-- LOGIN PAGE -->
+<div id="login-page" style="display:none">
+  <div class="login-left">
+    <div class="login-brand">
+      <div class="crest"><i class="fas fa-globe-africa"></i></div>
+      <h1>Binga Geoportal</h1>
+      <p>Binga Rural District Council — Spatial Data Infrastructure</p>
+    </div>
+    <div class="login-card">
+      <h2>Sign In</h2>
+      <p class="subtitle">Access the district geospatial platform</p>
+      <div class="form-group">
+        <label>Email Address</label>
+        <input type="email" id="login-email" placeholder="username@binga.ac.zw" autocomplete="off">
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" id="login-password" placeholder="Enter your password">
+      </div>
+      <button class="btn-login" onclick="handleLogin()">
+        Sign In <i class="fas fa-arrow-right" style="margin-left:8px"></i>
+      </button>
+      <p class="login-error" id="login-error"></p>
+      <p style="color:var(--text-muted);font-size:0.75rem;margin-top:1.25rem;text-align:center;">
+        Demo: <strong><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="6001040d090e2002090e07014e01034e1a17">[email&#160;protected]</a></strong> / <strong>Binga2024!</strong>
+      </p>
+    </div>
+  </div>
+  <div class="login-right">
+    <div class="login-right-content">
+      <h2>Mapping <span>Binga's</span> Future</h2>
+      <p style="color:var(--text-secondary);font-size:1rem;max-width:420px;line-height:1.6;">
+        A comprehensive geospatial platform for planning, managing and monitoring
+        district infrastructure, natural resources and community services.
+      </p>
+      <div class="stat-grid">
+        <div class="stat-card"><div class="num">159,982</div><div class="lbl">Population</div></div>
+        <div class="stat-card"><div class="num">25</div><div class="lbl">Wards</div></div>
+        <div class="stat-card"><div class="num">13,000</div><div class="lbl">Sq. Km Area</div></div>
+        <div class="stat-card"><div class="num">39,495</div><div class="lbl">Households</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PORTAL PAGE -->
+<div id="portal-page">
+  <div class="portal-header">
+    <div class="logo-area">
+      <div class="icon"><i class="fas fa-globe-africa"></i></div>
+      <h1>Binga <span>Geoportal</span></h1>
+    </div>
+    <div class="global-search" id="global-search-wrap">
+      <i class="fas fa-search"></i>
+      <input type="text" id="global-search-input" placeholder="Search all features..." oninput="globalSearch(this.value)" autocomplete="off">
+      <span class="search-shortcut">F</span>
+      <div class="gsearch-dropdown" id="global-search-results"></div>
+    </div>
+    <div class="header-actions">
+      <button class="btn-icon" title="Toggle Sidebar (B)" onclick="toggleSidebar()"><i class="fas fa-bars"></i></button>
+      <button class="btn-icon" title="Cycle Basemap (M)" onclick="cycleBasemap()"><i class="fas fa-layer-group"></i></button>
+      <button class="btn-icon" title="Full Extent (H)" onclick="zoomToDistrict()"><i class="fas fa-expand"></i></button>
+      <button class="btn-icon" title="Import Data" onclick="openImportModal()"><i class="fas fa-file-import"></i></button>
+      <button class="btn-icon" title="Print Map" onclick="window.print()"><i class="fas fa-print"></i></button>
+      <button class="btn-icon" title="Shortcuts (?)" onclick="openModal('shortcuts-modal')"><i class="fas fa-keyboard"></i></button>
+      <div class="user-badge"><i class="fas fa-user-circle"></i> <span id="user-display">admin</span></div>
+      <button class="btn-icon" title="Logout" onclick="handleLogout()"><i class="fas fa-sign-out-alt"></i></button>
+    </div>
+  </div>
+
+  <div class="portal-body">
+    <div class="sidebar" id="sidebar">
+      <div class="sidebar-tabs">
+        <button class="sidebar-tab active" onclick="switchTab(this,'dashboard-panel')"><i class="fas fa-tachometer-alt"></i> Dash</button>
+        <button class="sidebar-tab" onclick="switchTab(this,'layers-panel')"><i class="fas fa-layer-group"></i> Layers</button>
+        <button class="sidebar-tab" onclick="switchTab(this,'filter-panel')"><i class="fas fa-filter"></i> Filter</button>
+        <button class="sidebar-tab" onclick="switchTab(this,'data-panel')"><i class="fas fa-table"></i> Data</button>
+        <button class="sidebar-tab" onclick="switchTab(this,'tools-panel')"><i class="fas fa-tools"></i> Tools</button>
+      </div>
+      <div class="sidebar-content">
+
+        <!-- DASHBOARD -->
+        <div id="dashboard-panel"></div>
+
+        <!-- LAYERS -->
+        <div id="layers-panel" style="display:none"></div>
+
+        <!-- FILTER -->
+        <div id="filter-panel" style="display:none">
+          <div class="filter-group">
+            <label>Layer</label>
+            <select class="filter-select" id="filter-layer" onchange="updateFilterFields()"><option value="">— Select Layer —</option></select>
+          </div>
+          <div class="filter-group">
+            <label>Attribute</label>
+            <select class="filter-select" id="filter-attr"><option value="">— Select Attribute —</option></select>
+          </div>
+          <div class="filter-group">
+            <label>Value</label>
+            <input class="filter-input" id="filter-value" placeholder="Enter search value...">
+          </div>
+          <div class="btn-group">
+            <button class="btn btn-accent btn-block" onclick="applyFilter()"><i class="fas fa-search"></i> Apply Filter</button>
+            <button class="btn btn-outline btn-block" onclick="clearFilter()"><i class="fas fa-times"></i> Clear</button>
+          </div>
+          <div id="filter-results" style="margin-top:1rem"></div>
+        </div>
+
+        <!-- DATA -->
+        <div id="data-panel" style="display:none">
+          <div class="filter-group">
+            <label>Select Layer</label>
+            <select class="filter-select" id="data-layer-select" onchange="showDataTable()"></select>
+          </div>
+          <div class="btn-group" style="margin-bottom:0.75rem">
+            <button class="btn btn-accent btn-sm" onclick="openAddFeatureModal()"><i class="fas fa-plus"></i> Add</button>
+            <button class="btn btn-outline btn-sm" onclick="openImportModal()"><i class="fas fa-file-import"></i> Import</button>
+            <button class="btn btn-outline btn-sm" onclick="exportCSV()"><i class="fas fa-file-csv"></i> CSV</button>
+            <button class="btn btn-outline btn-sm" onclick="exportKML()"><i class="fas fa-file-code"></i> KML</button>
+            <button class="btn btn-outline btn-sm" onclick="exportGeoJSON()"><i class="fas fa-file-alt"></i> GeoJSON</button>
+          </div>
+          <div id="data-table-container"></div>
+        </div>
+
+        <!-- TOOLS -->
+        <div id="tools-panel" style="display:none">
+          <div class="filter-group">
+            <label>Measurement Tool</label>
+            <div class="btn-group">
+              <button class="btn btn-outline btn-block btn-sm" onclick="startMeasure('distance')"><i class="fas fa-ruler"></i> Distance</button>
+              <button class="btn btn-outline btn-block btn-sm" onclick="startMeasure('area')"><i class="fas fa-draw-polygon"></i> Area</button>
+            </div>
+          </div>
+          <div class="filter-group">
+            <label>Coordinates</label>
+            <div class="btn-group">
+              <button class="btn btn-outline btn-block btn-sm" onclick="toggleCoordCapture()"><i class="fas fa-crosshairs"></i> Capture Point</button>
+            </div>
+          </div>
+          <div class="filter-group">
+            <label>Basemaps</label>
+            <div class="btn-group" style="flex-direction:column">
+              <button class="btn btn-outline btn-block btn-sm" onclick="setBasemap('osm')"><i class="fas fa-map"></i> OpenStreetMap</button>
+              <button class="btn btn-outline btn-block btn-sm" onclick="setBasemap('satellite')"><i class="fas fa-satellite"></i> Satellite</button>
+              <button class="btn btn-outline btn-block btn-sm" onclick="setBasemap('topo')"><i class="fas fa-mountain"></i> Topographic</button>
+              <button class="btn btn-outline btn-block btn-sm" onclick="setBasemap('dark')"><i class="fas fa-moon"></i> Dark</button>
+            </div>
+          </div>
+          <div class="filter-group">
+            <label><i class="fas fa-bookmark" style="color:var(--accent);margin-right:4px"></i> Bookmarks</label>
+            <button class="btn btn-outline btn-sm btn-block" onclick="saveBookmark()" style="margin-bottom:0.5rem"><i class="fas fa-plus"></i> Save Current View</button>
+            <div id="bookmarks-list"></div>
+          </div>
+          <div class="filter-group">
+            <label>Quick Stats</label>
+            <div class="stats-bar">
+              <div class="stat-mini"><div class="val" id="stat-layers">0</div><div class="lab">Layers</div></div>
+              <div class="stat-mini"><div class="val" id="stat-features">0</div><div class="lab">Features</div></div>
+              <div class="stat-mini"><div class="val" id="stat-wards">25</div><div class="lab">Wards</div></div>
+              <div class="stat-mini"><div class="val" id="stat-pop">159,982</div><div class="lab">Pop.</div></div>
+            </div>
+          </div>
+          <div class="filter-group">
+            <label>About</label>
+            <p style="font-size:0.8rem;color:var(--text-secondary);line-height:1.6;">
+              Binga Geoportal v1.0 — Developed By Bukhosi Khumalo (KARTOLABS) for Binga Rural District Council.
+              Spatial data infrastructure for district planning and resource management.
+              &copy; 2026 BRDC.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="map-container">
+      <div id="map"></div>
+      <div class="coord-display" id="coord-display">Lat: -17.6200 | Lng: 27.3400</div>
+      <div class="legend-container" id="legend-box">
+        <h4><i class="fas fa-palette"></i> Legend</h4>
+        <div id="legend-items"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ADD FEATURE MODAL -->
+<div class="modal-overlay" id="add-feature-modal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3><i class="fas fa-plus-circle" style="color:var(--accent);margin-right:8px"></i> Add New Feature</h3>
+      <button class="modal-close" onclick="closeModal('add-feature-modal')">&times;</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label>Layer</label>
+        <select class="filter-select" id="add-layer-select"></select>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label>Latitude</label><input class="filter-input" id="add-lat" placeholder="-17.62" type="number" step="any"></div>
+        <div class="form-group"><label>Longitude</label><input class="filter-input" id="add-lng" placeholder="27.34" type="number" step="any"></div>
+      </div>
+      <div class="form-group"><label>Name</label><input class="filter-input" id="add-name" placeholder="Feature name"></div>
+      <div class="form-row">
+        <div class="form-group"><label>Ward</label><input class="filter-input" id="add-ward" placeholder="Ward name"></div>
+        <div class="form-group"><label>Village</label><input class="filter-input" id="add-village" placeholder="Village name"></div>
+      </div>
+      <div class="form-group"><label>Description</label><input class="filter-input" id="add-desc" placeholder="Brief description"></div>
+      <div class="form-group"><label>Image URL</label><input class="filter-input" id="add-img" placeholder="Assets/images/Dams/Name.jpg"></div>
+      <div id="add-extra-fields"></div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline" onclick="closeModal('add-feature-modal')">Cancel</button>
+      <button class="btn btn-accent" onclick="addFeature()"><i class="fas fa-plus"></i> Add Feature</button>
+    </div>
+  </div>
+</div>
+
+<!-- EDIT FEATURE MODAL -->
+<div class="modal-overlay" id="edit-feature-modal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3><i class="fas fa-edit" style="color:var(--accent);margin-right:8px"></i> Edit Feature</h3>
+      <button class="modal-close" onclick="closeModal('edit-feature-modal')">&times;</button>
+    </div>
+    <div class="modal-body" id="edit-modal-body"></div>
+    <div class="modal-footer">
+      <button class="btn btn-outline" onclick="closeModal('edit-feature-modal')">Cancel</button>
+      <button class="btn btn-accent" onclick="saveEditFeature()"><i class="fas fa-save"></i> Save</button>
+    </div>
+  </div>
+</div>
+
+<!-- IMPORT DATA MODAL -->
+<div class="modal-overlay" id="import-modal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3><i class="fas fa-file-import" style="color:var(--accent);margin-right:8px"></i> Import Data</h3>
+      <button class="modal-close" onclick="closeModal('import-modal')">&times;</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label>Target Layer</label>
+        <select class="filter-select" id="import-layer-select"></select>
+      </div>
+      <div class="import-drop-zone" onclick="document.getElementById('import-file').click()">
+        <i class="fas fa-cloud-upload-alt"></i>
+        <p id="import-file-label">Choose file...</p>
+        <p class="import-formats">Supported: .geojson, .csv, .kml</p>
+        <input type="file" id="import-file" accept=".geojson,.json,.csv,.kml" style="display:none" onchange="updateImportLabel()">
+      </div>
+      <div style="font-size:0.78rem;color:var(--text-muted);line-height:1.5">
+        <strong>CSV format:</strong> columns named <code>latitude</code>/<code>lat</code>
+        and <code>longitude</code>/<code>lng</code>. Optional: <code>name</code>, <code>ward</code>,
+        <code>village</code>, <code>description</code>.
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline" onclick="closeModal('import-modal')">Cancel</button>
+      <button class="btn btn-accent" onclick="handleImportFile()"><i class="fas fa-upload"></i> Import</button>
+    </div>
+  </div>
+</div>
+
+<!-- KEYBOARD SHORTCUTS MODAL -->
+<div class="modal-overlay" id="shortcuts-modal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3><i class="fas fa-keyboard" style="color:var(--accent);margin-right:8px"></i> Keyboard Shortcuts</h3>
+      <button class="modal-close" onclick="closeModal('shortcuts-modal')">&times;</button>
+    </div>
+    <div class="modal-body">
+      <div class="shortcut-grid">
+        <div class="shortcut-item"><span class="shortcut-key">F</span><span class="shortcut-desc">Focus search</span></div>
+        <div class="shortcut-item"><span class="shortcut-key">B</span><span class="shortcut-desc">Toggle sidebar</span></div>
+        <div class="shortcut-item"><span class="shortcut-key">H</span><span class="shortcut-desc">Home / full extent</span></div>
+        <div class="shortcut-item"><span class="shortcut-key">M</span><span class="shortcut-desc">Cycle basemap</span></div>
+        <div class="shortcut-item"><span class="shortcut-key">L</span><span class="shortcut-desc">Toggle legend</span></div>
+        <div class="shortcut-item"><span class="shortcut-key">?</span><span class="shortcut-desc">Show shortcuts</span></div>
+        <div class="shortcut-item"><span class="shortcut-key">Esc</span><span class="shortcut-desc">Close modal</span></div>
+        <div class="shortcut-item"><span class="shortcut-key">Enter</span><span class="shortcut-desc">Submit login</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Toast Container -->
+<div class="toast-container" id="toast-container"></div>
+
+<!-- SCRIPTS -->
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://unpkg.com/leaflet-draw@1.0.4/dist/leaflet.draw.js"></script>
+<script src="js/config.js"></script>
+<script src="js/layers-data.js"></script>
+<script src="js/utils.js"></script>
+<script src="js/map.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/filter.js"></script>
+<script src="js/features.js"></script>
+<script src="js/export.js"></script>
+<script src="js/tools.js"></script>
+<script src="js/search.js"></script>
+<script src="js/dashboard.js"></script>
+<script src="js/import.js"></script>
+<script src="js/shortcuts.js"></script>
+<script src="js/auth.js"></script>
+<script>
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    const loader = document.getElementById('loading-screen');
+    if (loader) {
+      loader.style.transition = 'opacity 0.6s ease';
+      loader.style.opacity = '0';
+      setTimeout(() => {
+        loader.style.display = 'none';
+        document.getElementById('login-page').style.display = 'flex';
+      }, 600);
+    }
+  }, 1800);
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          27.33,
+          -17.62
+        ]
+      },
+      "properties": {
+        "id": "id_0062",
+        "name": "Binga Police Station",
+        "ward": "Ward 4 - Binga Centre",
+        "village": "Binga Centre",
+        "description": "Main district police station",
+        "imgURL": "assets/images/policeStations/Binga_Police_Station.jpg",
+        "layer": "policeStations"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          27.55,
+          -17.66
+        ]
+      },
+      "properties": {
+        "id": "id_0063",
+        "name": "Mlibizi Police Station",
+        "ward": "Ward 8 - Mlibizi",
+        "village": "Mlibizi",
+        "description": "Police station serving southern wards",
+        "imgURL": "assets/images/policeStations/Mlibizi_Police_Station.jpg",
+        "layer": "policeStations"
+      }
+    }
+  ]
+}
