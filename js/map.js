@@ -360,8 +360,8 @@ function getRoadStyle(feature) {
 // ═══════════════════════════════════════════════════
 const RIVER_STYLES = {
   //  fclass   color        weight  opacity
-  river:  { color: '#add8e6', weight: 0.5, opacity: 0.9 },
-  stream: { color: '#add8e6', weight: 0.1, opacity: 0.9 }
+  river:  { color: '#add8e6', weight: 1, opacity: 1 },
+  stream: { color: '#add8e6', weight: 0.5, opacity: 0.9 }
 };
 
 function getRiverStyle(feature) {
