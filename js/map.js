@@ -464,9 +464,9 @@ function renderLayerGroup(key, data) {
   if (key === 'wardBoundaries') {
     return L.geoJSON(data, {
       style: {
-        color:   '#7FB3D8',
+        color:   '#020202',
         weight:  1.8,
-        opacity: 0.75,
+        opacity: 0.5,
         fill:    false
       },
       onEachFeature: (f, layer) => {
