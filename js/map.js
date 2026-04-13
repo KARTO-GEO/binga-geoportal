@@ -352,6 +352,22 @@ function getRoadStyle(feature) {
   };
 }
 
+// ═══════════════════════════════════════════════════
+// RIVER SYMBOLOGY  (keyed on feature.properties.fclass)
+// ═══════════════════════════════════════════════════
+const RIVER_STYLES = {
+  //  fclass   color        weight  opacity
+  river:  { color: '#add8e6', weight: 0.5, opacity: 0.9 },
+  stream: { color: '#add8e6', weight: 0.1, opacity: 0.9 }
+};
+
+function getRiverStyle(feature) {
+  const fclass = (feature.properties && feature.properties.fclass) || 'river';
+  const s = RIVER_STYLES[fclass] || RIVER_STYLES.river;
+  return { color: s.color, weight: s.weight, opacity: s.opacity };
+}
+
+
 // National roads get a second "casing" pass — a white dashed overlay on top
 // so the dark-brown road shows white dashes as requested.
 function addNationalCasing(data, map) {
@@ -499,6 +515,14 @@ function renderLayerGroup(key, data) {
         layer.bindPopup(buildPopup(f.properties, key), { maxWidth: 320 });
         bindPointLabel(layer, f.properties);
       }
+    });
+  }
+
+  // ── Rivers: fclass-based symbology (river = 0.5, stream = 0.1) ──
+  if (key === 'rivers') {
+    return L.geoJSON(data, {
+      style:         getRiverStyle,
+      onEachFeature: (f, layer) => layer.bindPopup(buildPopup(f.properties, key), { maxWidth: 320 })
     });
   }
 
