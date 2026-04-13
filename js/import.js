@@ -53,11 +53,12 @@ function handleImportFile() {
         return;
       }
 
-      // Add to dataset
+      // Add to dataset and persist
       if (!sampleData[layerKey]) {
         sampleData[layerKey] = { type: 'FeatureCollection', features: [] };
       }
       sampleData[layerKey].features.push(...importedFeatures);
+      persistAddBatch(layerKey, importedFeatures);
 
       // Rebuild map layer
       rebuildLayer(layerKey);
@@ -235,6 +236,32 @@ function parseKML(content, layerKey) {
           properties: {
             id:          Math.random().toString(36).substr(2, 9),
             name:        nameEl ? nameEl.textContent.trim() : 'KML Line',
+            ward:        '',
+            village:     '',
+            description: descEl ? descEl.textContent.trim() : '',
+            imgURL:      '',
+            layer:       layerKey
+          }
+        });
+      }
+    }
+
+    // Handle Polygon (outer ring only; holes are discarded)
+    const polyEl = pm.querySelector('Polygon outerBoundaryIs LinearRing coordinates');
+    if (polyEl) {
+      const coordPairs = polyEl.textContent.trim().split(/\s+/);
+      const ringCoords = coordPairs.map(p => {
+        const [lng, lat] = p.split(',').map(Number);
+        return [lng, lat];
+      }).filter(c => !isNaN(c[0]) && !isNaN(c[1]));
+
+      if (ringCoords.length > 3) {
+        features.push({
+          type: 'Feature',
+          geometry: { type: 'Polygon', coordinates: [ringCoords] },
+          properties: {
+            id:          Math.random().toString(36).substr(2, 9),
+            name:        nameEl ? nameEl.textContent.trim() : 'KML Polygon',
             ward:        '',
             village:     '',
             description: descEl ? descEl.textContent.trim() : '',

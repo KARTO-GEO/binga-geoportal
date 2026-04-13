@@ -18,6 +18,9 @@ const layerGroups = {};
 // Fixes: null IDs, Name vs name casing, null geometry.
 // ═══════════════════════════════════════════════════
 function normalizeData() {
+  // Merge saved user edits/additions/deletions on top of the base dataset
+  applyUserChanges();
+
   let counter = 1;
 
   for (const [layerKey, data] of Object.entries(sampleData)) {

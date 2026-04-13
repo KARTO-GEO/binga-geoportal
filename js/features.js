@@ -51,6 +51,7 @@ function addFeature() {
     sampleData[layerKey] = { type: 'FeatureCollection', features: [] };
   }
   sampleData[layerKey].features.push(feature);
+  persistAdd(layerKey, feature);
 
   // Add marker to the Leaflet layer group
   const marker = L.marker([lat, lng], { icon: createIcon(def.color, def.icon) });
@@ -85,6 +86,7 @@ function deleteFeatureById(id, layerKey) {
 
   const sid = String(id);
   data.features = data.features.filter(f => String(f.properties.id) !== sid);
+  persistDelete(layerKey, sid);
 
   rebuildLayer(layerKey);
   showDataTable();
@@ -131,10 +133,12 @@ function saveEditFeature() {
   if (!feature) return;
 
   const editableKeys = Object.keys(feature.properties).filter(k => k !== 'id' && k !== 'layer');
+  const patch = {};
   for (const k of editableKeys) {
     const el = document.getElementById('edit-' + k);
-    if (el) feature.properties[k] = el.value;
+    if (el) { feature.properties[k] = el.value; patch[k] = el.value; }
   }
+  persistEdit(layerKey, editingFeatureId, patch);
 
   rebuildLayer(layerKey);
   closeModal('edit-feature-modal');
